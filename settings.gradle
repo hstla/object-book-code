@@ -1,0 +1,4 @@
+rootProject.name = 'oop-book'
+include 'chapter01'
+include 'chapter02'
+include 'chapter03'
