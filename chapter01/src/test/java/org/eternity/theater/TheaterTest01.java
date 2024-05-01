@@ -27,8 +27,6 @@ class TheaterTest01 {
     public void 초대장_입장_성공() throws Exception {
         //given
 
-
-
         //when
 
         //then
