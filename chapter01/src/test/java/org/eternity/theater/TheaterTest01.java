@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 class TheaterTest01 {
 
     @Test
-    public void 입장_성공_테스트() throws Exception {
+    public void 초대장_없이_입장_성공() throws Exception {
         //given
         Ticket ticket = new Ticket(5000L);
         TicketOffice ticketOffice = new TicketOffice(10000L, ticket);
@@ -26,10 +26,17 @@ class TheaterTest01 {
     @Test
     public void 초대장_입장_성공() throws Exception {
         //given
+        Ticket ticket = new Ticket(5000L);
+        TicketOffice ticketOffice = new TicketOffice(10000L, ticket);
+        TicketSeller ticketSeller = new TicketSeller(ticketOffice);
+        Theater theater = new Theater(ticketSeller);
+        Bag bag = new Bag(10000L, new Invitation());
+        bag.setTicket(ticket);
+        Audience audience = new Audience(bag);
 
         //when
-
+        theater.enter(audience);
         //then
-
+        assertThat(bag.getAmount()).isEqualTo(10000);
     }
 }
