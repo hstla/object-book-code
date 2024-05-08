@@ -1,42 +1,53 @@
 package org.eternity.theater;
 
 import org.eternity.theater.step01.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 
 class TheaterTest01 {
 
+    private Ticket ticket;
+    private TicketOffice ticketOffice;
+    private TicketSeller ticketSeller;
+    private Theater theater;
+
+    @BeforeEach
+    void setUp() {
+        ticket = new Ticket(5000L);
+        ticketOffice = new TicketOffice(10000L, ticket);
+        ticketSeller = new TicketSeller(ticketOffice);
+        theater = new Theater(ticketSeller);
+    }
+
+
     @Test
-    public void 초대장_없이_입장_성공() throws Exception {
+    void 초대장_없이_입장_테스트() {
         //given
-        Ticket ticket = new Ticket(5000L);
-        TicketOffice ticketOffice = new TicketOffice(10000L, ticket);
-        TicketSeller ticketSeller = new TicketSeller(ticketOffice);
-        Theater theater = new Theater(ticketSeller);
-        Bag bag = new Bag(10000);
+        Bag bag = new Bag(10000L);
         Audience audience = new Audience(bag);
 
         //when
         theater.enter(audience);
+
         //then
-        assertThat(bag.getAmount()).isEqualTo(5000);
+        assertThat(bag.getAmount()).isEqualTo(5000L);
+        assertThat(bag.hasTicket()).isEqualTo(true);
     }
 
     @Test
-    public void 초대장_입장_성공() throws Exception {
+    void 초대장으로_입장_테스트() {
         //given
-        Ticket ticket = new Ticket(5000L);
-        TicketOffice ticketOffice = new TicketOffice(10000L, ticket);
-        TicketSeller ticketSeller = new TicketSeller(ticketOffice);
-        Theater theater = new Theater(ticketSeller);
         Bag bag = new Bag(10000L, new Invitation());
-        bag.setTicket(ticket);
         Audience audience = new Audience(bag);
 
         //when
         theater.enter(audience);
+
         //then
-        assertThat(bag.getAmount()).isEqualTo(10000);
+        assertThat(bag.getAmount()).isEqualTo(10000L);
+        assertThat(bag.hasTicket()).isEqualTo(true);
+
     }
 }
