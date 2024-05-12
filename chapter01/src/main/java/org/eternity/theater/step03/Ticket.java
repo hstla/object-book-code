@@ -1,4 +1,4 @@
-package org.eternity.theater.step02;
+package org.eternity.theater.step03;
 
 public class Ticket {
     private Long fee;

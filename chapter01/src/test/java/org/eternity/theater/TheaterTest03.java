@@ -1,12 +1,13 @@
 package org.eternity.theater;
 
-import org.eternity.theater.step01.*;
+import org.eternity.theater.step03.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
-class TheaterTest01 {
+class TheaterTest03 {
 
     private Ticket ticket;
     private TicketOffice ticketOffice;
