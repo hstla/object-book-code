@@ -10,7 +10,7 @@ public class TaxableNightlyDiscountPhone extends NightlyDiscountPhone{
     public TaxableNightlyDiscountPhone(Money nightlyAmount, Money regularAmount, Duration seconds, double taxRate) {
         super(nightlyAmount, regularAmount, seconds);
         this.taxRate = taxRate;
-    }ß
+    }
 
     @Override
     protected Money afterCalculated(Money fee) {
