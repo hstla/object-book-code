@@ -1,4 +1,8 @@
+package org.eternity.lecture.step02;
 
+import java.util.List;
+
+import static java.util.stream.Collectors.joining;
 
 public class GradeLecture extends Lecture {
     private List<Grade> grades;
@@ -11,11 +15,6 @@ public class GradeLecture extends Lecture {
     @Override
     public String evaluate() {
         return super.evaluate() + ", " + gradesStatistics();
-    }
-
-    @Override
-    public String getEvaluationMethod() {
-        return "Grade";
     }
 
     private String gradesStatistics() {
@@ -44,5 +43,10 @@ public class GradeLecture extends Lecture {
                 .mapToInt(Integer::intValue)
                 .average()
                 .orElse(0);
+    }
+
+    @Override
+    public String getEvaluationMethod() {
+        return "Grade";
     }
 }

@@ -19,6 +19,7 @@ class GradeLecture
     @canceled = canceled
   end
 
+# 위임 - 자신이 수신한 메시지를 곧바로 다른 객체에게 전달해서 처리를 요청하는 것
   def stats(this)
     @parent.stats(this)
   end

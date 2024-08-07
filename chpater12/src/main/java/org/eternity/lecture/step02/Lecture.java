@@ -28,7 +28,8 @@ public class Lecture {
     }
 
     public String stats() {
-        return String.format("Title: %s, Evaluation Method: %s", title, getEvaluationMethod);
+        return String.format("Title: %s, Evaluation Method: %s",
+                title, getEvaluationMethod());
     }
 
     public String getEvaluationMethod() {
