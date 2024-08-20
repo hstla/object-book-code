@@ -9,19 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimeOfDayDiscountPolicy extends BasicRatePolicy {
-    private List<LocalTime> starts = new ArrayList<>();
-    private List<LocalTime> ends = new ArrayList<>();
-    private List<Duration> durations = new ArrayList<>();
-    private List<Money> amounts = new ArrayList<>();
+    private List<LocalTime> starts = new ArrayList<LocalTime>();
+    private List<LocalTime> ends = new ArrayList<LocalTime>();
+    private List<Duration> durations = new ArrayList<Duration>();
+    private List<Money>  amounts = new ArrayList<Money>();
 
     @Override
-    public Money calculateCallFee(Call call) {
+    protected Money calculateCallFee(Call call) {
         Money result = Money.ZERO;
         for(DateTimeInterval interval : call.splitByDay()) {
-            for (int loop = 0; loop < starts.size(); loop++) {
-                result.plus(amounts.get(loop).times(
-                        Duration.between(from(interval, starts.get(loop)), to(interval, ends.get(loop)))
-                                .getSeconds() / durations.get(loop).getSeconds()));
+            for(int loop=0; loop < starts.size(); loop++) {
+                result.plus(amounts.get(loop).times(Duration.between(from(interval, starts.get(loop)),
+                        to(interval, ends.get(loop))).getSeconds() / durations.get(loop).getSeconds()));
             }
         }
         return result;

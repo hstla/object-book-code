@@ -67,7 +67,7 @@ public class DateTimeInterval {
     }
 
     private void addMiddleDays(List<DateTimeInterval> result, long days) {
-        for(int loop = 1; loop < days; loop++) {
+        for(int loop=1; loop < days; loop++) {
             result.add(DateTimeInterval.during(from.toLocalDate().plusDays(loop)));
         }
     }

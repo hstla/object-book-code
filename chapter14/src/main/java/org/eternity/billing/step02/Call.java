@@ -1,4 +1,4 @@
-package org.eternity.billing.step01;
+package org.eternity.billing.step02;
 
 import org.eternity.time.DateTimeInterval;
 

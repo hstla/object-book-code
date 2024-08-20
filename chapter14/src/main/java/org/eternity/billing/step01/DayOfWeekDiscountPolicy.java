@@ -1,19 +1,25 @@
 package org.eternity.billing.step01;
 
+import org.eternity.money.Money;
+import org.eternity.time.DateTimeInterval;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DayOfWeekDiscountPolicy extends BasicRatePolicy {
-    private List<DayOfWeekDiscountRule>  = new ArrayList<>();
+    private List<DayOfWeekDiscountRule> rules = new ArrayList<>();
 
-    public DayOfWeekDiscountsRule(List<DayOfWeek> dayOfweeks, Duration duration, Money amount) {
-        this.dayOfWeeks = dayOfweeks;
-        this.duration = duration;
-        this.amount = amount;
+    public DayOfWeekDiscountPolicy(List<DayOfWeekDiscountRule> rules) {
+        this.rules = rules;
     }
 
-    public Money calculate(DateTimeInterval interval) {
-        if (dayOfWeeks.contains(interval.getFrom().getDayOfWeek())) {
-            return amount.times(interval.duration().getSeconds() / duration.getSeconds());
+    @Override
+    protected Money calculateCallFee(Call call) {
+        Money result = Money.ZERO;
+        for(DateTimeInterval interval : call.getInterval().splitByDay()) {
+            for(DayOfWeekDiscountRule rule: rules) { result.plus(rule.calculate(interval));
+            }
         }
-        return Money.ZERO;
+        return result;
     }
 }

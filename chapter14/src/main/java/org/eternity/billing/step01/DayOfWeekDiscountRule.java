@@ -1,13 +1,21 @@
 package org.eternity.billing.step01;
 
+import org.eternity.money.Money;
+import org.eternity.time.DateTimeInterval;
 
-public class DayOfWeekDiscountsRule {
+import java.time.DayOfWeek;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
+public class DayOfWeekDiscountRule {
     private List<DayOfWeek> dayOfWeeks = new ArrayList<>();
     private Duration duration = Duration.ZERO;
     private Money amount = Money.ZERO;
 
-    public DayOfWeekDiscountsRule(List<DayOfWeek> dayOfweeks, Duration duration, Money amount) {
-        this.dayOfWeeks = dayOfweeks;
+    public DayOfWeekDiscountRule(List<DayOfWeek> dayOfWeeks,
+                                 Duration duration, Money  amount) {
+        this.dayOfWeeks = dayOfWeeks;
         this.duration = duration;
         this.amount = amount;
     }
@@ -16,6 +24,7 @@ public class DayOfWeekDiscountsRule {
         if (dayOfWeeks.contains(interval.getFrom().getDayOfWeek())) {
             return amount.times(interval.duration().getSeconds() / duration.getSeconds());
         }
+
         return Money.ZERO;
     }
 }
